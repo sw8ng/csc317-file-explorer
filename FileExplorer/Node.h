@@ -18,4 +18,9 @@ public:
   void setNext(Node *next);
 };
 
+bool operator==(const Node&lhs, const Node& rhs);
+
+bool operator==(const Node&rhs, const Node&lhs);
+
+
 #endif
