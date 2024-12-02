@@ -6,21 +6,20 @@
 template <typename T> class Node {
 private:
   T data;
-  Node *next;
-  Node *previous;
+  Node* next;
+  Node* previous;
 
 public:
   Node(T data);
   T getData() const;
-  Node *getPrev() const;
-  Node *getNext() const;
-  void setPrev(Node *prev);
-  void setNext(Node *next);
+  Node* getPrev() const;
+  Node* getNext() const;
+  void setPrev(Node* prev);
+  void setNext(Node* next);
 };
 
-bool operator==(const Node&lhs, const Node& rhs);
 
-bool operator==(const Node&rhs, const Node&lhs);
-
+template <typename T>
+bool operator==(const Node<T>&lhs, const Node<T>& rhs);
 
 #endif

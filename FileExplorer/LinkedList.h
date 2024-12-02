@@ -13,7 +13,7 @@ private:
 public:
   LinkedList();
   ~LinkedList();
-  void pushBack(T data);
+  void push_back(T data);
   void deleteData(T data);
   Node<T>* getHead() const;
   Node<T>* getTail() const;

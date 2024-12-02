@@ -1,4 +1,4 @@
-#include "Node.h"
+#include "node.h"
 #include <string>
 using namespace std;
 
@@ -32,7 +32,14 @@ void Node<T>::setPrev(Node* prev){
   this->previous = prev;
 }
 
+template <typename T>
+bool operator==(const Node<T>& lhs, const Node<T>& rhs) {
+  return lhs.getData() == rhs.getData(); 
+}
+
+
 template class Node<int>;
 template class Node<string>;
 template class Node<char>;
 template class Node<double>;
+
