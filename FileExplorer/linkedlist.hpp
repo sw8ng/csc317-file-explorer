@@ -1,6 +1,6 @@
 #include <string>
 #include "linkedList.h"
-#include "Node.h"
+#include "node.h"
 using namespace std;
 
 template <typename T>
