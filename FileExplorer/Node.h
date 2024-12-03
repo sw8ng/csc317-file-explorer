@@ -5,6 +5,10 @@
 
 template <typename T>
 class Node {
+private:
+    T data;
+    Node<T>* next;
+    Node<T>* prev;
 public:
     Node(T data);
     T getData() const;
@@ -13,10 +17,6 @@ public:
     void setNext(Node<T>* next);
     void setPrev(Node<T>* prev);
 
-private:
-    T data;
-    Node<T>* next;
-    Node<T>* prev;
 };
 
 

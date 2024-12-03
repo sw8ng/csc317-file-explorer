@@ -185,6 +185,7 @@ void Folder::print() const {
 
 
 bool Folder::operator==(const Folder& rhs) const {
+    //debug
     //bool sameName = this->getName() == rhs.getName();
     //bool sameFiles = (this->files == rhs.files);
     //bool sameFolders = (this->folders == rhs.folders);

@@ -134,6 +134,9 @@ void LinkedList<T>::operator+=(LinkedList<T>& list) {
     list.size = 0;
 }
 
+template<typename T>
+int LinkedList<T>::getSize() const {
+return size; }
 
 template class LinkedList<File*>;
 template class LinkedList<Folder*>;

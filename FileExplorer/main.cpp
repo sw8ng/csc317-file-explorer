@@ -8,36 +8,6 @@
 using namespace std;
 
 int main() {
-	/*cout << "Testing Node class: " << endl;
-	Node<string>* testNode = new Node<string>("Hello World!\n");
-	cout << testNode->getData() << endl;
-	delete testNode;
-
-	cout << "\n" << "Testing LinkedList class:" << endl;
-	LinkedList<char>* testList = new LinkedList<char>;
-	testList->push_back('a');
-	testList->push_back('b');
-	testList->push_back('c');
-	cout << testList->getHead()->getData() << ' ';
-	cout << testList->getTail()->getData() << endl;
-
-	testList->deleteData('a');
-	cout << testList->getHead()->getData() << ' ';
-	testList->deleteData('c');
-	cout << testList->getTail()->getData() << endl;
-
-	LinkedList<char>* bestList = new LinkedList<char>();
-	bestList->push_back('a');
-
-	*testList += *bestList;
-
-	cout << testList->getHead()->getData() << ' ';
-	cout << testList->getTail()->getData() << endl;
-
-	delete bestList;
-	delete testList;*/
-	
-
 	cout << "\n" << "Testing File class: " << endl;
 	File* testFile1 = new File("test.txt", 100, "text");
 	testFile1->print();
