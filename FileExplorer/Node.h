@@ -3,23 +3,21 @@
 
 #include <string>
 
-template <typename T> class Node {
-private:
-  T data;
-  Node* next;
-  Node* previous;
-
+template <typename T>
+class Node {
 public:
-  Node(T data);
-  T getData() const;
-  Node* getPrev() const;
-  Node* getNext() const;
-  void setPrev(Node* prev);
-  void setNext(Node* next);
+    Node(T data);
+    T getData() const;
+    Node<T>* getNext() const;
+    Node<T>* getPrev() const;
+    void setNext(Node<T>* next);
+    void setPrev(Node<T>* prev);
+
+private:
+    T data;
+    Node<T>* next;
+    Node<T>* prev;
 };
 
-
-template <typename T>
-bool operator==(const Node<T>&lhs, const Node<T>& rhs);
 
 #endif

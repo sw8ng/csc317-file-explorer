@@ -3,28 +3,40 @@
 
 using namespace std;
 
-File::File(string name, int size, string type){
-    this->name = name;
-    this->size = size;
-    this->type = type;
+
+File::File(string name, int size, string type) {
+	this->name = name;
+	this->size = size;
+	this->type = type;
 }
 
-int File::getSize() const{
-    return this->size;
+File::File(const File& file) {
+	this->name = file.name;
+	this->size = file.size;
+	this->type = file.type;
 }
 
-void File::setSize(int size){
-    this->size = size;
+int File::getSize() const {
+	return this->size;
 }
 
-string File::getType() const{
-    return this->type;
+void File::setSize(int size) {
+	this->size = size;
 }
 
-void File::setType(string type){
-    this->type = type;
+string File::getType() const {
+	return this->type;
 }
 
-void File::print() const{
-    cout << "File: " << name << ", Size: " << " bytes, Type: " << type << endl;
+void File::setType(string type) {
+	this->type = type;
 }
+
+void File::print() const {
+	cout << name << ", Size: " << size << " bytes, Type: " << type << endl;
+}
+
+bool File::operator==(const File& rhs) const {
+	return (this->name == rhs.getName()) && (this->size == rhs.getSize()) && (this->type == rhs.getType());
+}
+

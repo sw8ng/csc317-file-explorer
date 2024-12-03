@@ -2,19 +2,18 @@
 #define FILESYSTEMOBJECT_H
 #include <string>
 
-struct FileSystemObject{
-    protected:
-        std::string name;
-    public:
-        virtual ~FileSystemObject();
-        //pure virtual function
-        virtual void print() const = 0; 
-        std::string getName() const{
-            return name;
-        }
-        void setName(std::string newName){
-            name = newName;
-        }
+struct FileSystemObject {
+protected:
+	std::string name;
+public:
+	virtual ~FileSystemObject() {};
+	virtual void print() const = 0;
+	std::string getName() const {
+		return this->name;
+	}
+	void setName(std::string newName) {
+		this->name = newName;
+	}
 };
 
 #endif

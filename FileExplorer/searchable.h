@@ -3,10 +3,10 @@
 
 #include <string>
 
-struct Searchable{
-    public:
-        virtual ~Searchable();
-        virtual void search(std::string query) const = 0;
+struct Searchable {
+public:
+	virtual ~Searchable() {};
+	virtual void search(std::string query) const = 0;
 };
 
 #endif
