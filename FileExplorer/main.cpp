@@ -1,14 +1,13 @@
 #include <iostream>
 #include <string>
-#include "linkedList.h"
-#include "folder.h"
-#include "file.h"
-
+#include "FileSystem.h"
+#include "LinkedList.h"
 
 using namespace std;
 
 int main() {
-	cout << "\n" << "Testing File class: " << endl;
+	/*
+		cout << "\n" << "Testing File class: " << endl;
 	File* testFile1 = new File("test.txt", 100, "text");
 	testFile1->print();
 
@@ -108,6 +107,9 @@ int main() {
 	else {
 		cout << "testFolder3 is not the same as testFolder2" << endl;
 	}
+*/
 
+	FileSystem * fileSystem = new FileSystem;
+	(fileSystem->getRoot())->print();
 	return 0;
 }
