@@ -5,10 +5,10 @@
 
 using namespace std;
 
-enum Actions {QUIT, ADD, REMOVE, MOVE, COPY, PRINTOUT, MERGE};
+enum Actions {QUIT, ADD, REMOVE, MOVE, COPY, BACK, OPEN, SEARCH};
 
 const int min_menu = 1;
-const int max_menu = MERGE;
+const int max_menu = SEARCH;
 
 int getMenuChoice();
 
@@ -32,16 +32,18 @@ int main() {
 				//break;
 			case COPY:
 				//break;
-			case PRINTOUT:
+			case BACK:
 				//break;
-			case MERGE:
+			case OPEN:
+			    //break
+			case SEARCH:
 				cout << "Coming soon!";
 				break;
 		}
 	}
 	while (choice != QUIT);
 
-	return 0;
+	
 	/*
 		cout << "\n" << "Testing File class: " << endl;
 	File* testFile1 = new File("test.txt", 100, "text");
@@ -160,8 +162,9 @@ int getMenuChoice()
 	   cout << " (" << REMOVE << ") Removing a folder" << endl;
 	   cout << " (" << MOVE << ") Move files into a folder" << endl;
 	   cout << " (" << COPY << ") Copies folders" << endl;
-	   cout << " (" << PRINTOUT << ") Print's the contents inside of the folder" << endl;
-	   cout << " (" << MERGE << ") Merges two folders contents together (if we have time)" << endl;
+	   cout << " (" << BACK << ") Goes back one step in a folder (if at root does nothing)" << endl;
+	   cout << " (" << OPEN << ") Opens The folder to see the content" << endl;
+	   cout << " (" << SEARCH << ") Searches for File and Folder " << endl;
 	   cout << "Enter a number from " << min_menu << " to " << max_menu << ", or 0 to exit: " << endl;
 
 	   cin >> choice;
