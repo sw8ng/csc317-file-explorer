@@ -5,7 +5,43 @@
 
 using namespace std;
 
+enum Actions {QUIT, ADD, REMOVE, MOVE, COPY, PRINTOUT, MERGE};
+
+const int min_menu = 1;
+const int max_menu = MERGE;
+
+int getMenuChoice();
+
 int main() {
+
+	int choice;
+	do
+	{
+		choice = getMenuChoice();
+
+		switch (choice)
+		{
+			case QUIT:
+				cout << "Thank you for using the file system!" << endl;
+				break;
+			case ADD:
+				//break;
+			case REMOVE:
+				//break;
+			case MOVE:
+				//break;
+			case COPY:
+				//break;
+			case PRINTOUT:
+				//break;
+			case MERGE:
+				cout << "Coming soon!";
+				break;
+		}
+	}
+	while (choice != QUIT);
+
+	return 0;
 	/*
 		cout << "\n" << "Testing File class: " << endl;
 	File* testFile1 = new File("test.txt", 100, "text");
@@ -112,4 +148,23 @@ int main() {
 	FileSystem * fileSystem = new FileSystem;
 	(fileSystem->getRoot())->print();
 	return 0;
+}
+
+int getMenuChoice()
+{
+	int choice;
+	cout << endl;
+       cout << "--------------------------------------------" << endl;
+       cout << "Options menu: " << endl;
+	   cout << " (" << ADD << ") Add things to a folder" << endl;
+	   cout << " (" << REMOVE << ") Removing a folder" << endl;
+	   cout << " (" << MOVE << ") Move files into a folder" << endl;
+	   cout << " (" << COPY << ") Copies folders" << endl;
+	   cout << " (" << PRINTOUT << ") Print's the contents inside of the folder" << endl;
+	   cout << " (" << MERGE << ") Merges two folders contents together (if we have time)" << endl;
+	   cout << "Enter a number from " << min_menu << " to " << max_menu << ", or 0 to exit: " << endl;
+
+	   cin >> choice;
+
+	   return choice;
 }
