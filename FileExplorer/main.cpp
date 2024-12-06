@@ -17,6 +17,7 @@ int main() {
 	int choice;
 	do
 	{
+		//cout << "Current Folder " folder << endl; to keep checking which folder we are in.
 		choice = getMenuChoice();
 
 		switch (choice)
@@ -35,7 +36,7 @@ int main() {
 			case BACK:
 				//break;
 			case OPEN:
-			    //break
+			    //break;
 			case SEARCH:
 				cout << "Coming soon!";
 				break;
