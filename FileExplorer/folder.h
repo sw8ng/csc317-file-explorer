@@ -10,9 +10,10 @@ struct Folder : public FileSystemObject, public Searchable {
 private:
 	LinkedList<File*> files;
 	LinkedList<Folder*> folders;
+	Folder* parent;
 public:
 	//initializes list of files and list of folders inside constructor
-	Folder(std::string name = "folder_name");
+	Folder(std::string name = "folder_name", Folder* parent = nullptr);
 	Folder(const Folder& folder);
 	void addFile(File* file);
 	void deleteFile(File* file);
@@ -26,9 +27,12 @@ public:
 	File* getFile(std::string query);
 	//prints all folders with matching name
 	Folder* getFolder(std::string query);
+	Folder* getParent() const;
 	int getSize() const;
 	void search(std::string query)const;
+	void printHierachy() const;
 	void print() const;
+	Node<Folder*>* getFoldersHead() const;
 	bool operator==(const Folder& rhs) const;
 };
 #endif

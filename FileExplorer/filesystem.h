@@ -3,7 +3,7 @@
 
 #include "folder.h"
 
-struct FileSystem {
+struct FileSystem : public Searchable{
 private:
 	Folder* root;
 public:
@@ -11,5 +11,7 @@ public:
 	FileSystem(Folder* folder);
 	void setRoot(Folder* folder);
 	Folder* getRoot() const;
+	Folder* getFolder(Folder* currentFolder, const std::string& name) const;
+	void search(std::string query)const;
 };
 #endif

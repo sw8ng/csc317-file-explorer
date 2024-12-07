@@ -3,15 +3,17 @@
 
 using namespace std;
 
-Folder::Folder(string name) {
+Folder::Folder(string name, Folder* parent) {
 	//LinkedList objects are automatically initialized
 	this->name = name;
+    this->parent = parent;
 }
 
 Folder::Folder(const Folder& folder) {
 	this->name = folder.name;
 	this->files = folder.files;
 	this->folders = folder.folders;
+    this->parent = folder.parent;
 }
 
 void Folder::addFile(File* file) {
@@ -24,9 +26,11 @@ void Folder::deleteFile(File* file) {
 
 void Folder::addFolder(Folder* folder) {
 	this->folders.push_back(folder);
+    folder->parent = this;
 }
 
 void Folder::deleteFolder(Folder* folder) {
+    folder->parent = nullptr;
 	this->folders.deleteData(folder);
 }
 
@@ -55,7 +59,7 @@ void Folder::moveFile(const string& fileName, const string& dest) {
         }
 
         if (destFolder != nullptr) {
-            destFolder->addFile(fileToMove); 
+            destFolder->addFile(fileToMove);
             cout << "File added to folder: " << dest << endl;
 
             this->deleteFile(fileToMove);
@@ -69,7 +73,6 @@ void Folder::moveFile(const string& fileName, const string& dest) {
         cout << "File with name " << fileName << " not found!" << endl;
     }
 }
-
 void Folder::moveFolder(const string& folderName, const string& dest) {
     Node<Folder*>* currFolderNode = this->folders.getHead();
     Folder* folderToMove = nullptr;
@@ -95,7 +98,7 @@ void Folder::moveFolder(const string& folderName, const string& dest) {
         }
 
         if (destFolder != nullptr) {
-            destFolder->addFolder(folderToMove); 
+            destFolder->addFolder(folderToMove);
             cout << "Folder moved to: " << dest << endl;
 
             this->deleteFolder(folderToMove);
@@ -141,6 +144,10 @@ Folder* Folder::getFolder(string name) {
 	return nullptr;
 }
 
+Folder* Folder::getParent() const {
+    return this->parent;
+}
+
 
 int Folder::getSize() const {
 	int totalSize = 0;
@@ -164,13 +171,33 @@ void Folder::search(string query) const {
 
 }
 
+void Folder::printHierachy() const {
+    static int indentLevel = 0;
+
+    for (int i = 0; i < indentLevel; ++i) {
+        cout << "    ";
+    }
+    cout << "-" << this->name << endl;
+
+    ++indentLevel;
+
+    Node<Folder*>* folderNode = this->folders.getHead();
+    while (folderNode != nullptr) {
+        folderNode->getData()->printHierachy();
+        folderNode = folderNode->getNext();
+    }
+
+    --indentLevel;
+
+}
+
 void Folder::print() const {
 	cout << "Folder: " << this->name << ", Size: " << this->getSize() << " bytes" << endl;
 
 	cout << "    Files:" << endl;
 	Node<File*>* fileNode = this->files.getHead();
 	while (fileNode != nullptr) {
-		cout << "        ";
+		cout << "        -";
 		fileNode->getData()->print(); 
 		fileNode = fileNode->getNext();
 	}
@@ -178,9 +205,13 @@ void Folder::print() const {
 	cout << "    Subfolders:" << endl;
 	Node<Folder*>* folderNode = this->folders.getHead();
 	while (folderNode != nullptr) {
-		cout << "        " << folderNode->getData()->getName() << ", Size: " << folderNode->getData()->getSize() << " bytes" << endl;
+		cout << "        -" << folderNode->getData()->getName() << ", Size: " << folderNode->getData()->getSize() << " bytes" << endl;
 		folderNode = folderNode->getNext();
 	}
+}
+
+Node<Folder*>* Folder::getFoldersHead() const {
+    return this->folders.getHead(); 
 }
 
 

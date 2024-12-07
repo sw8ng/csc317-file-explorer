@@ -11,19 +11,29 @@ const int min_menu = 1;
 const int max_menu = SEARCH;
 
 int getMenuChoice();
+Folder* getStartingFolder(FileSystem* fileSystem);
+Folder* openSubFolder(Folder* currentFolder);
 
 int main() {
-
 	int choice;
+	string folderName = "";
+	Folder* currentFolder = new Folder;
+	FileSystem* fileSystem = new FileSystem;
+	cout << "Folder Structure: \n" << endl;
+	fileSystem->getRoot()->printHierachy();
+	
+	currentFolder = getStartingFolder(fileSystem);
+
 	do
 	{
-		//cout << "Current Folder " folder << endl; to keep checking which folder we are in.
+		cout << endl;
+		currentFolder->print();
 		choice = getMenuChoice();
 
 		switch (choice)
 		{
 			case QUIT:
-				cout << "Thank you for using the file system!" << endl;
+				cout << "Thank you for using File Explorer!" << endl;
 				break;
 			case ADD:
 				//break;
@@ -32,11 +42,20 @@ int main() {
 			case MOVE:
 				//break;
 			case COPY:
-				//break;
+				cout << "Coming soon!";
+				break;
 			case BACK:
-				//break;
+				if (currentFolder->getParent() == nullptr) {
+					cout << "You are already at the root folder." << endl;
+				}
+				else {
+					currentFolder = currentFolder->getParent();
+					cout << "\nYou're now exploring the " << currentFolder->getName() << " folder." << endl;
+				}
+				break;
 			case OPEN:
-			    //break;
+				currentFolder = openSubFolder(currentFolder);
+				break;
 			case SEARCH:
 				cout << "Coming soon!";
 				break;
@@ -94,9 +113,9 @@ int main() {
 	cout << endl;
 	testFolder->print();
 
-	File* file = testFolder->getFile("test.txt"); 
+	File* file = testFolder->getFile("test.txt");
 
-	if (file != nullptr) { 
+	if (file != nullptr) {
 		file->setSize(1000);
 		cout << file->getSize() << endl;
 	}
@@ -128,7 +147,7 @@ int main() {
 	testFolder2->addFile(audioFile);
 	testFolder3->addFile(audioFile);
 	testFolder2->print();
-	
+
 	testFolder3->setName("Test folder2");
 	testFolder3->print();
 	if (*testFolder2 == *testFolder3) {
@@ -148,27 +167,78 @@ int main() {
 	}
 */
 
-	FileSystem * fileSystem = new FileSystem;
-	(fileSystem->getRoot())->print();
 	return 0;
 }
 
-int getMenuChoice()
-{
+int getMenuChoice(){
+	bool validChoice = false;
 	int choice;
-	cout << endl;
-       cout << "--------------------------------------------" << endl;
-       cout << "Options menu: " << endl;
-	   cout << " (" << ADD << ") Add things to a folder" << endl;
-	   cout << " (" << REMOVE << ") Removing a folder" << endl;
-	   cout << " (" << MOVE << ") Move files into a folder" << endl;
-	   cout << " (" << COPY << ") Copies folders" << endl;
-	   cout << " (" << BACK << ") Goes back one step in a folder (if at root does nothing)" << endl;
-	   cout << " (" << OPEN << ") Opens The folder to see the content" << endl;
-	   cout << " (" << SEARCH << ") Searches for File and Folder " << endl;
-	   cout << "Enter a number from " << min_menu << " to " << max_menu << ", or 0 to exit: " << endl;
+	while (!validChoice) {
+		cout << endl;
+		cout << "--------------------------------------------" << endl;
+		cout << "OPTIONS MENU: " << endl;
+		cout << " (" << ADD << ") Add a file or subfolder to current folder" << endl;
+		cout << " (" << REMOVE << ") Remove a file or subfolder in current folder" << endl;
+		cout << " (" << MOVE << ") Move file or subfolder into a folder in current folder" << endl;
+		cout << " (" << COPY << ") Copy file or subfolder in current folder" << endl;
+		cout << " (" << BACK << ") Go to parent folder of current folder (if at root does nothing)" << endl;
+		cout << " (" << OPEN << ") Open a subfolder in current folder" << endl;
+		cout << " (" << SEARCH << ") Search for files and folders by name" << endl;
+		cout << "Enter a number from " << min_menu << " to " << max_menu << ", or 0 to exit: " << endl;
 
-	   cin >> choice;
+		cin >> choice;
+		cout << endl;
 
+		if (!(choice < min_menu) || !(choice > max_menu)) {
+			validChoice = true;
+		}
+		else {
+			cout << "ERROR! Input must be a number from " << min_menu << " to " << max_menu << ", or 0 to exit." << endl;
+		}
+	}
 	   return choice;
 }
+Folder* getStartingFolder(FileSystem* fileSystem) {
+	string folderName = "";
+	Folder* currentFolder = nullptr;
+	bool validName = false;
+	cout << "\nWhere would you like to start exploring? Please enter the folder name: " << endl;
+
+	while (!validName) {
+		cin >> folderName;
+
+		currentFolder = fileSystem->getFolder(fileSystem->getRoot(), folderName);
+
+		if (currentFolder != nullptr) {
+			cout << "\nYou're now exploring the " << folderName << " folder." << endl;
+			validName = true;
+		}
+		else {
+			cout << "Folder \"" << folderName << "\" not found. Please enter a valid folder name : " << endl;
+		}
+	}
+	return currentFolder;
+}
+
+Folder* openSubFolder(Folder* currentFolder) {
+	string folderName = "";
+	Folder* temp = new Folder;
+	bool validName = false;
+	if (currentFolder->getFoldersHead() == nullptr) {
+		cout << "The current folder has no subfolders." << endl;
+		return currentFolder;
+	}
+	cout << "Enter the name of the subfolder to open: " << endl;
+	while (!validName) {
+		cin >> folderName;
+		temp = currentFolder->getFolder(folderName);
+		if (temp != nullptr) {
+			cout << "\n You're now exploring the " << folderName << " folder." << endl;
+			validName = true;
+		}else {
+			cout << "Subfolder not found. Please enter a valid name: " << endl;
+		}
+	}
+	return temp;
+}
+
