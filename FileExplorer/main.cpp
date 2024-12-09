@@ -276,50 +276,69 @@ void moveFileOrFolder(Folder* currentFolder) {
 
 	if (type == "File" || type == "file") {
 		cout << "\nEnter the name of the file to move: " << endl;
-		cin.ignore(); 
+		cin.ignore();
 		getline(cin, name);
 
 		File* fileToMove = currentFolder->getFile(name);
 		if (fileToMove != nullptr) {
-			cout << "\nEnter the destination folder to move the file to: " << endl;
+			cout << "\nEnter the destination folder to move the file to (or type 'parent' to move to the parent folder): " << endl;
 			getline(cin, destName);
-			destinationFolder = currentFolder->getFolder(destName);
+
+			if (destName == "parent" || destName == "Parent") {
+				destinationFolder = currentFolder->getParent()
+			}
+			else {
+				destinationFolder = currentFolder->getFolder(destName);
+			}
 
 			if (destinationFolder != nullptr) {
 				destinationFolder->addFile(fileToMove);
 				currentFolder->deleteFile(fileToMove);
-				cout << "File \"" << name << "\" moved successfully to \"" << destName << "\"." << endl;
-			}else {
+				cout << "File \"" << name << "\" moved successfully to \"" << destinationFolder->getName() << "\"." << endl;
+			}
+			else {
 				cout << "Destination folder not found." << endl;
 			}
-		}else {
+		}
+		else {
 			cout << "File not found." << endl;
 		}
-	}else if (type == "Folder" || type == "folder") {
+	}
+	else if (type == "Folder" || type == "folder") {
 		cout << "\nEnter the name of the folder to move: " << endl;
 		cin.ignore();
 		getline(cin, name);
 
 		Folder* folderToMove = currentFolder->getFolder(name);
 		if (folderToMove != nullptr) {
-			cout << "\nEnter the destination folder to move the folder to: " << endl;
+			cout << "\nEnter the destination folder to move the folder to (or type 'parent' to move to the parent folder): " << endl;
 			getline(cin, destName);
-			destinationFolder = currentFolder->getFolder(destName);
+
+			if (destName == "parent" || destName == "Parent") {
+				destinationFolder = currentFolder->getParent(); 
+			}
+			else {
+				destinationFolder = currentFolder->getFolder(destName);
+			}
 
 			if (destinationFolder != nullptr) {
 				destinationFolder->addFolder(folderToMove);
 				currentFolder->deleteFolder(folderToMove);
-				cout << "Folder \"" << name << "\" moved successfully to \"" << destName << "\"." << endl;
-			}else {
+				cout << "Folder \"" << name << "\" moved successfully to \"" << destinationFolder->getName() << "\"." << endl;
+			}
+			else {
 				cout << "Destination folder not found." << endl;
 			}
-		}else {
+		}
+		else {
 			cout << "Folder not found." << endl;
 		}
-	}else {
+	}
+	else {
 		cout << "Invalid input. Please enter 'File' or 'Folder'." << endl;
 	}
 }
+
 
 void copyFileOrFolder(Folder* currentFolder) {
 	string type, name, destName;
