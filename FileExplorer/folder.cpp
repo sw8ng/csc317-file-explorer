@@ -10,11 +10,24 @@ Folder::Folder(string name, Folder* parent) {
 }
 
 Folder::Folder(const Folder& folder) {
-	this->name = folder.name;
-	this->files = folder.files;
-	this->folders = folder.folders;
+    this->name = folder.name;
     this->parent = folder.parent;
+
+    Node<File*>* fileNode = folder.files.getHead();
+    while (fileNode != nullptr) {
+        File* newFile = new File(*fileNode->getData());
+        this->files.push_back(newFile);  
+        fileNode = fileNode->getNext();
+    }
+
+    Node<Folder*>* folderNode = folder.folders.getHead();
+    while (folderNode != nullptr) {
+        Folder* newFolder = new Folder(*folderNode->getData());
+        this->folders.push_back(newFolder); 
+        folderNode = folderNode->getNext();
+    }
 }
+
 
 void Folder::addFile(File* file) {
 	this->files.push_back(file);
@@ -192,7 +205,7 @@ void Folder::printHierachy() const {
 }
 
 void Folder::print() const {
-	cout << "Folder: " << this->name << ", Size: " << this->getSize() << " bytes" << endl;
+	cout << "Folder: " << this->name << ", Size: " << this->getSize() << " KB" << endl;
 
 	cout << "    Files:" << endl;
 	Node<File*>* fileNode = this->files.getHead();
@@ -205,7 +218,7 @@ void Folder::print() const {
 	cout << "    Subfolders:" << endl;
 	Node<Folder*>* folderNode = this->folders.getHead();
 	while (folderNode != nullptr) {
-		cout << "        -" << folderNode->getData()->getName() << ", Size: " << folderNode->getData()->getSize() << " bytes" << endl;
+		cout << "        -" << folderNode->getData()->getName() << ", Size: " << folderNode->getData()->getSize() << " KB" << endl;
 		folderNode = folderNode->getNext();
 	}
 }

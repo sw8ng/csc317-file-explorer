@@ -33,7 +33,7 @@ void File::setType(string type) {
 }
 
 void File::print() const {
-	cout << name << ", Size: " << size << " bytes, Type: " << type << endl;
+	cout << name << ", Size: " << size << " KB, Type: " << type << endl;
 }
 
 bool File::operator==(const File& rhs) const {
