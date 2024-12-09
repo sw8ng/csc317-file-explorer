@@ -285,7 +285,7 @@ void moveFileOrFolder(Folder* currentFolder) {
 			getline(cin, destName);
 
 			if (destName == "parent" || destName == "Parent") {
-				destinationFolder = currentFolder->getParent()
+				destinationFolder = currentFolder->getParent();
 			}
 			else {
 				destinationFolder = currentFolder->getFolder(destName);
