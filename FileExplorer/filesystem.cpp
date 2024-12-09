@@ -4,7 +4,7 @@
 using namespace std;
 
 FileSystem::FileSystem(){
-    Folder * newFolder = new Folder("Home");
+    Folder * homeFolder = new Folder("Home");
     Folder* desktopFolder = new Folder("Desktop");
     Folder* downloadsFolder = new Folder("Downloads");
     Folder* documentsFolder = new Folder("Documents");
@@ -12,18 +12,19 @@ FileSystem::FileSystem(){
     Folder* musicFolder = new Folder("Music");
     Folder* videosFolder = new Folder("Videos");
 
-    newFolder->addFolder(desktopFolder);
-    newFolder->addFolder(downloadsFolder);
-    newFolder->addFolder(documentsFolder);
-    newFolder->addFolder(picturesFolder);
-    newFolder->addFolder(musicFolder);
-    newFolder->addFolder(videosFolder);
+    homeFolder->addFolder(desktopFolder);
+    homeFolder->addFolder(downloadsFolder);
+    homeFolder->addFolder(documentsFolder);
+    homeFolder->addFolder(picturesFolder);
+    homeFolder->addFolder(musicFolder);
+    homeFolder->addFolder(videosFolder);
+
 
     Folder* reportsFolder = new Folder("Reports");
     Folder* slidesFolder = new Folder("Slides");
     documentsFolder->addFolder(reportsFolder);
     documentsFolder->addFolder(slidesFolder);
-    this->root = newFolder; 
+    this->root = homeFolder;
 }
 
 FileSystem::FileSystem(Folder* folder){

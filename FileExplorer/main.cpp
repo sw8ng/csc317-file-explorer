@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
+#include <sstream> 
 #include "FileSystem.h"
 #include "LinkedList.h"
 
 using namespace std;
 
-enum Actions {QUIT, ADD, REMOVE, MOVE, COPY, BACK, OPEN, SEARCH};
+enum Actions {QUIT, ADD, REMOVE, MOVE, COPY, BACK, OPEN, SEARCH, SORT_SIZE, SORT_NAME};
 
 const int min_menu = 1;
 const int max_menu = SEARCH;
@@ -13,10 +14,14 @@ const int max_menu = SEARCH;
 int getMenuChoice();
 Folder* getStartingFolder(FileSystem* fileSystem);
 Folder* openSubFolder(Folder* currentFolder);
+void addFileOrFolder(Folder* currentFolder);
+void deleteFileOrFolder(Folder* currentFolder);
+void moveFileOrFolder(Folder* currentFolder);
+void copyFileOrFolder(Folder* currentFolder);
 
 int main() {
 	int choice;
-	string folderName = "";
+	string folderName, type = "";
 	Folder* currentFolder = new Folder;
 	FileSystem* fileSystem = new FileSystem;
 	cout << "Folder Structure: \n" << endl;
@@ -36,19 +41,21 @@ int main() {
 				cout << "Thank you for using File Explorer!" << endl;
 				break;
 			case ADD:
-				//break;
+				addFileOrFolder(currentFolder);
+				break;
 			case REMOVE:
-				//break;
+				deleteFileOrFolder(currentFolder);
+				break;
 			case MOVE:
-				//break;
+				moveFileOrFolder(currentFolder);
+				break;
 			case COPY:
-				cout << "Coming soon!";
+				copyFileOrFolder(currentFolder);
 				break;
 			case BACK:
 				if (currentFolder->getParent() == nullptr) {
 					cout << "You are already at the root folder." << endl;
-				}
-				else {
+				}else {
 					currentFolder = currentFolder->getParent();
 					cout << "\nYou're now exploring the " << currentFolder->getName() << " folder." << endl;
 				}
@@ -57,115 +64,13 @@ int main() {
 				currentFolder = openSubFolder(currentFolder);
 				break;
 			case SEARCH:
-				cout << "Coming soon!";
+			case SORT_SIZE:
+			case SORT_NAME:
+				cout << "Coming soon!" << endl;
 				break;
 		}
 	}
 	while (choice != QUIT);
-
-	
-	/*
-		cout << "\n" << "Testing File class: " << endl;
-	File* testFile1 = new File("test.txt", 100, "text");
-	testFile1->print();
-
-	File* testFile2 = new File(*testFile1);
-	testFile2->print();
-	if (*testFile1 == *testFile2) {
-		cout << "Both files are the same." << endl;
-	}
-	else {
-		cout << "Files are different." << endl;
-	}
-
-
-	testFile2->setName("test.h");
-	testFile2->setSize(50);
-	testFile2->setType("header");
-	testFile2->print();
-	if (*testFile1 == *testFile2) {
-		cout << "Both files are the same." << endl;
-	}
-	else {
-		cout << "Files are different." << endl;
-	}
-
-	cout << "\n" << "Testing Folder class:" << endl;
-	Folder* testFolder = new Folder("Test Folder");
-	testFolder->addFile(testFile1);
-	testFolder->addFile(testFile2);
-	testFolder->print();
-	testFolder->deleteFile(testFile1);
-	cout << endl;
-	testFolder->print();
-
-	Folder* testSubfolder = new Folder("Test Subfolder 1");
-	testFolder->addFolder(testSubfolder);
-	cout << endl;
-	testFolder->print();
-
-	Folder* testSubfolder2 = new Folder("Test Subfolder 2");
-	testFolder->addFolder(testSubfolder2);
-	cout << endl;
-	testFolder->print();
-
-	testFolder->addFile(testFile1);
-	cout << endl;
-	testFolder->print();
-
-	File* file = testFolder->getFile("test.txt");
-
-	if (file != nullptr) {
-		file->setSize(1000);
-		cout << file->getSize() << endl;
-	}
-	else {
-		cout << "File not found!" << endl;
-	}
-	testFolder->print();
-
-	testFolder->moveFile("test.txt", testSubfolder->getName());
-	testFolder->print();
-	cout << endl;
-	testFolder->deleteFile(testFolder->getFile("test.txt"));
-	cout << endl;
-	testFolder->print();
-
-	cout << endl;
-	testFolder->moveFolder(testSubfolder->getName(), testSubfolder2->getName());
-	testFolder->print();
-
-	Folder * testFolder2 = new Folder("Test folder2");
-	if (*testFolder == *testFolder2) {
-		cout << "testFolder2 is the same as testFolder" << endl;
-	}else {
-		cout << "testFolder2 is not the same as testFolder" << endl;
-	}
-
-	Folder* testFolder3 = new Folder("Test folder3");
-	File* audioFile = new File("audio.mp3", 1000, "MP3");
-	testFolder2->addFile(audioFile);
-	testFolder3->addFile(audioFile);
-	testFolder2->print();
-
-	testFolder3->setName("Test folder2");
-	testFolder3->print();
-	if (*testFolder2 == *testFolder3) {
-		cout << "testFolder3 is the same as testFolder2" << endl;
-	}
-	else {
-		cout << "testFolder3 is not the same as testFolder2" << endl;
-	}
-
-	testFolder2->deleteFile(testFolder2->getFile("audio.mp3"));
-	testFolder2->print();
-	if (*testFolder2 == *testFolder3) {
-		cout << "testFolder3 is the same as testFolder2" << endl;
-	}
-	else {
-		cout << "testFolder3 is not the same as testFolder2" << endl;
-	}
-*/
 
 	return 0;
 }
@@ -184,6 +89,8 @@ int getMenuChoice(){
 		cout << " (" << BACK << ") Go to parent folder of current folder (if at root does nothing)" << endl;
 		cout << " (" << OPEN << ") Open a subfolder in current folder" << endl;
 		cout << " (" << SEARCH << ") Search for files and folders by name" << endl;
+		cout << " (" << SORT_SIZE << ") Sort files inside current folder by size" << endl;
+		cout << " (" << SORT_NAME << ") Sort files inside current folder by name" << endl;
 		cout << "Enter a number from " << min_menu << " to " << max_menu << ", or 0 to exit: " << endl;
 
 		cin >> choice;
@@ -191,13 +98,13 @@ int getMenuChoice(){
 
 		if (!(choice < min_menu) || !(choice > max_menu)) {
 			validChoice = true;
-		}
-		else {
+		}else {
 			cout << "ERROR! Input must be a number from " << min_menu << " to " << max_menu << ", or 0 to exit." << endl;
 		}
 	}
 	   return choice;
 }
+
 Folder* getStartingFolder(FileSystem* fileSystem) {
 	string folderName = "";
 	Folder* currentFolder = nullptr;
@@ -205,7 +112,7 @@ Folder* getStartingFolder(FileSystem* fileSystem) {
 	cout << "\nWhere would you like to start exploring? Please enter the folder name: " << endl;
 
 	while (!validName) {
-		cin >> folderName;
+		getline(cin, folderName);
 
 		currentFolder = fileSystem->getFolder(fileSystem->getRoot(), folderName);
 
@@ -222,23 +129,261 @@ Folder* getStartingFolder(FileSystem* fileSystem) {
 
 Folder* openSubFolder(Folder* currentFolder) {
 	string folderName = "";
-	Folder* temp = new Folder;
-	bool validName = false;
+	Folder* temp = nullptr;
+
 	if (currentFolder->getFoldersHead() == nullptr) {
 		cout << "The current folder has no subfolders." << endl;
 		return currentFolder;
 	}
+
 	cout << "Enter the name of the subfolder to open: " << endl;
-	while (!validName) {
-		cin >> folderName;
-		temp = currentFolder->getFolder(folderName);
-		if (temp != nullptr) {
-			cout << "\n You're now exploring the " << folderName << " folder." << endl;
-			validName = true;
-		}else {
-			cout << "Subfolder not found. Please enter a valid name: " << endl;
-		}
+	cin.ignore();
+	getline(cin, folderName);
+
+	temp = currentFolder->getFolder(folderName);
+
+	if (temp != nullptr) {
+		cout << "\nYou're now exploring the " << folderName << " folder." << endl;
+		return temp;
 	}
-	return temp;
+	else {
+		cout << "Subfolder not found. Returning to the current folder." << endl;
+		return currentFolder;
+	}
 }
 
+void addFileOrFolder(Folder* currentFolder) {
+	string type;
+
+	cout << "Enter the type of item you want to add: (File/Folder): " << endl;
+	cin >> type;
+
+	if (type == "File" || type == "file") {
+		string fileName;
+		int fileSize;
+		string fileType = "Unknown";
+
+		cout << "\nEnter the file name (e.g., example.txt): " << endl;
+		cin >> fileName;
+		cout << "\nEnter the file size (in KB): " << endl;
+		cin >> fileSize;
+
+		size_t dotPos = fileName.find_last_of(".");
+		if(dotPos != string::npos) {
+			string extension = fileName.substr(dotPos + 1);
+			if (extension == "txt") {
+				fileType = "Text";
+			}
+			else if (extension == "h") {
+				fileType = "Header";
+			}
+			else if (extension == "cpp") {
+				fileType = "Source Code";
+			}
+			else if (extension == "mp3") {
+				fileType = "Audio";
+			}
+			else if (extension == "jpg" || extension == "png") {
+				fileType = "Image";
+			}
+			else if (extension == "css") {
+				fileType = "CSS Stylesheet";
+			}
+			else if (extension == "js") {
+				fileType = "JavaScript";
+			}
+			else if (extension == "html" || extension == "htm") {
+				fileType = "HTML";
+			}
+			else if (extension == "csv") {
+				fileType = "CSV (Comma Separated Values)";
+			}
+			else if (extension == "pdf") {
+				fileType = "PDF Document";
+			}
+			else if (extension == "zip") {
+				fileType = "ZIP Archive";
+			}
+			else if (extension == "gif") {
+				fileType = "GIF Image";
+			}
+
+		}
+
+		File* newFile = new File(fileName, fileSize, fileType);
+		currentFolder->addFile(newFile);
+
+		cout << "File \"" << fileName << "\" of type \"" << fileType << "\" and size "
+			<< fileSize << " KB added successfully." << endl;
+	}else if (type == "Folder" || type == "folder") {
+		string folderName;
+		cout << "\nEnter the name of the new folder: " << endl;
+		cin.ignore();
+		getline(cin, folderName);
+
+		Folder* newFolder = new Folder(folderName, currentFolder);
+		currentFolder->addFolder(newFolder);
+
+		cout << "Folder \"" << folderName << "\" added successfully." << endl;
+	}else {
+		cout << "\nInvalid input. Please enter 'File' or 'Folder'." << endl;
+	}
+}
+
+void deleteFileOrFolder(Folder* currentFolder) {
+	string type;
+
+	cout << "Enter the type of item you want to delete: (File/Folder): " << endl;
+	cin >> type;
+
+	if (type == "File" || type == "file") {
+		string fileName;
+		cout << "\nEnter the file name to delete: " << endl;
+		cin >> fileName;
+
+		File* fileToDelete = currentFolder->getFile(fileName);
+
+		if (fileToDelete != nullptr) {
+			currentFolder->deleteFile(fileToDelete);
+			cout << "File \"" << fileName << "\" deleted successfully." << endl;
+		}else {
+			cout << "File \"" << fileName << "\" not found in this folder." << endl;
+		}
+	}else if (type == "Folder" || type == "folder") {
+		string folderName;
+		cout << "\nEnter the folder name to delete: " << endl;
+		cin.ignore();
+		getline(cin, folderName);
+
+		Folder* folderToDelete = currentFolder->getFolder(folderName);
+
+		if (folderToDelete != nullptr) {
+			currentFolder->deleteFolder(folderToDelete);
+			cout << "Folder \"" << folderName << "\" deleted successfully." << endl;
+		}else {
+			cout << "Folder \"" << folderName << "\" not found in this folder." << endl;
+		}
+	}else {
+		cout << "\nInvalid input. Please enter 'File' or 'Folder'." << endl;
+	}
+}
+
+void moveFileOrFolder(Folder* currentFolder) {
+	string type, name, destName;
+	Folder* destinationFolder = nullptr;
+	cout << "Enter the type of item to move (File/Folder): " << endl;
+	cin >> type;
+
+	if (type == "File" || type == "file") {
+		cout << "\nEnter the name of the file to move: " << endl;
+		cin.ignore(); 
+		getline(cin, name);
+
+		File* fileToMove = currentFolder->getFile(name);
+		if (fileToMove != nullptr) {
+			cout << "\nEnter the destination folder to move the file to: " << endl;
+			getline(cin, destName);
+			destinationFolder = currentFolder->getFolder(destName);
+
+			if (destinationFolder != nullptr) {
+				destinationFolder->addFile(fileToMove);
+				currentFolder->deleteFile(fileToMove);
+				cout << "File \"" << name << "\" moved successfully to \"" << destName << "\"." << endl;
+			}else {
+				cout << "Destination folder not found." << endl;
+			}
+		}else {
+			cout << "File not found." << endl;
+		}
+	}else if (type == "Folder" || type == "folder") {
+		cout << "\nEnter the name of the folder to move: " << endl;
+		cin.ignore();
+		getline(cin, name);
+
+		Folder* folderToMove = currentFolder->getFolder(name);
+		if (folderToMove != nullptr) {
+			cout << "\nEnter the destination folder to move the folder to: " << endl;
+			getline(cin, destName);
+			destinationFolder = currentFolder->getFolder(destName);
+
+			if (destinationFolder != nullptr) {
+				destinationFolder->addFolder(folderToMove);
+				currentFolder->deleteFolder(folderToMove);
+				cout << "Folder \"" << name << "\" moved successfully to \"" << destName << "\"." << endl;
+			}else {
+				cout << "Destination folder not found." << endl;
+			}
+		}else {
+			cout << "Folder not found." << endl;
+		}
+	}else {
+		cout << "Invalid input. Please enter 'File' or 'Folder'." << endl;
+	}
+}
+
+void copyFileOrFolder(Folder* currentFolder) {
+	string type, name, destName;
+	Folder* destinationFolder = nullptr;
+	cout << "Enter the type of item inside current folder to copy (File/Folder): " << endl;
+	cin >> type;
+
+	if (type == "File" || type == "file") {
+		cout << "\nEnter the name of the file to copy: " << endl;
+		cin.ignore();
+		getline(cin, name);
+
+		File* fileToCopy = currentFolder->getFile(name);
+		if (fileToCopy != nullptr) {
+			cout << "\nEnter the destination folder to copy the file to (Enter current folder name or here for the current folder):" << endl;
+			getline(cin, destName);
+			if (destName == currentFolder->getName() || destName == "here" || destName == "Here") {
+				destinationFolder = currentFolder;
+			}else {
+				destinationFolder = currentFolder->getFolder(destName);
+			}
+
+			if (destinationFolder != nullptr) {
+				File* newFile = new File(fileToCopy->getName() + "_copy", fileToCopy->getSize(), fileToCopy->getType());
+				destinationFolder->addFile(newFile);
+				cout << "File \"" << name << "\" copied successfully to \"" << destinationFolder->getName() << "\"." << endl;
+			}else {
+				cout << "Destination folder not found." << endl;
+			}
+		}else {
+			cout << "File not found." << endl;
+		}
+	}else if (type == "Folder" || type == "folder") {
+		cout << "\nEnter the name of the folder to copy: " << endl;
+		cin.ignore();
+		getline(cin, name);
+
+		Folder* folderToCopy = currentFolder->getFolder(name);
+		if (folderToCopy != nullptr) {
+			cout << "\nEnter the destination folder to copy the folder to (Enter current folder name or here for the current folder): " << endl;
+			getline(cin, destName);
+
+			if (destName == "here" || destName == currentFolder->getName()) {
+				destinationFolder = currentFolder;
+			}
+			else {
+				destinationFolder = currentFolder->getFolder(destName);
+			}
+
+			if (destinationFolder != nullptr) {
+				Folder* newFolder = new Folder(*folderToCopy);
+				newFolder->setName(newFolder->getName() + "_copy");
+				destinationFolder->addFolder(newFolder);
+				cout << "Folder \"" << name << "\" copied successfully to \"" << destinationFolder->getName() << "\"." << endl;
+			}
+			else {
+				cout << "Destination folder not found." << endl;
+			}
+		}
+		else {
+			cout << "Folder not found." << endl;
+		}
+	}
+	else {
+		cout << "Invalid input. Please enter 'File' or 'Folder'." << endl;
+	}
+}
