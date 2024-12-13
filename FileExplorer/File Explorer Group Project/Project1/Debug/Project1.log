@@ -1,0 +1,169 @@
+﻿  file.cpp
+  filesystem.cpp
+  folder.cpp
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,31): error C2677: binary '==': no global operator found which takes type 'std::string' (or there is no acceptable conversion)
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(3555,17):
+      could be 'bool std::operator ==(std::nullptr_t,const std::unique_ptr<_Ty,_Dx> &) noexcept'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(std::nullptr_t,const std::unique_ptr<_Ty,_Dx> &) noexcept': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'std::string'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(3549,30):
+      or       'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(3501,30):
+      or       'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1922,17):
+      or       'bool std::operator ==(std::nullptr_t,const std::shared_ptr<_Ty> &) noexcept'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(std::nullptr_t,const std::shared_ptr<_Ty> &) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'std::string'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1911,17):
+      or       'bool std::operator ==(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1874,17):
+      or       'bool std::operator ==(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iterator(488,17):
+      or       'bool std::operator ==(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)': could not deduce template argument for 'const std::istreambuf_iterator<_Elem,_Traits>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)': could not deduce template argument for 'const std::istreambuf_iterator<_Elem,_Traits> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iterator(306,17):
+      or       'bool std::operator ==(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept': could not deduce template argument for 'const std::istream_iterator<_Ty,_Elem,_Traits,_Diff>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept': could not deduce template argument for 'const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5042,17):
+      or       'bool std::operator ==(const _Elem *const ,const std::basic_string<_Elem,_Traits,_Alloc> &)'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const _Elem *const ,const std::basic_string<_Elem,_Traits,_Alloc> &)': could not deduce template argument for 'const _Elem *const ' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5023,30):
+      or       'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const )'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const )': could not deduce template argument for 'const std::basic_string<_Elem,_Traits,_Alloc>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const )': could not deduce template argument for 'const std::basic_string<_Elem,_Traits,_Alloc> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5017,30):
+      or       'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept': could not deduce template argument for 'const std::basic_string<_Elem,_Traits,_Alloc>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept': could not deduce template argument for 'const std::basic_string<_Elem,_Traits,_Alloc> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(1038,30):
+      or       'bool std::operator ==(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept': could not deduce template argument for 'const std::allocator<_Ty>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept': could not deduce template argument for 'const std::allocator<_Ty> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xutility(4251,5):
+      or       'bool std::operator ==(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)': could not deduce template argument for 'const std::move_iterator<_Iter>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)': could not deduce template argument for 'const std::move_iterator<_Iter> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xutility(1676,5):
+      or       'bool std::operator ==(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)': could not deduce template argument for 'const std::reverse_iterator<_BidIt>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)': could not deduce template argument for 'const std::reverse_iterator<_BidIt> &' from 'overloaded-function'
+      D:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\utility(490,27):
+      or       'bool std::operator ==(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)'
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)': could not deduce template argument for 'const std::pair<_Ty1,_Ty2>' from 'T (void) const'
+          with
+          [
+              T=File *
+          ]
+          C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,21):
+          'bool std::operator ==(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)': could not deduce template argument for 'const std::pair<_Ty1,_Ty2> &' from 'overloaded-function'
+  
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,59): error C2039: 'getName': is not a member of 'Node<T>'
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,59): error C2039:         with
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,59): error C2039:         [
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,59): error C2039:             T=File *
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(186,59): error C2039:         ]
+      C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\linkedlist.h(10,5):
+      see declaration of 'Node<T>'
+          with
+          [
+              T=File *
+          ]
+  
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(190,64): error C2143: syntax error: missing ';' before 'string'
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(190,78): error C2296: '<<': not valid as left operand has type 'const char [12]'
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(190,78): error C2297: '<<': not valid as right operand has type 'Folder *'
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(191,9): error C2181: illegal else without matching if
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.cpp(194,11): error C2039: 'getNext': is not a member of 'Folder'
+      C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\folder.h(9,8):
+      see declaration of 'Folder'
+  
+  linkedlist.cpp
+  main.cpp
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\main.cpp(74,4): error C2360: initialization of 'query' is skipped by 'case' label
+      C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\main.cpp(68,12):
+      see declaration of 'query'
+  
+C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\main.cpp(75,4): error C2360: initialization of 'query' is skipped by 'case' label
+      C:\Users\JT_th\Desktop\csc340-file-explorer\FileExplorer\main.cpp(68,12):
+      see declaration of 'query'
+  
+  node.cpp
+  Generating Code...

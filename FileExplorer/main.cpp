@@ -35,6 +35,7 @@ int main() {
 		currentFolder->print();
 		choice = getMenuChoice();
 
+		string query;
 		switch (choice)
 		{
 			case QUIT:
@@ -64,6 +65,12 @@ int main() {
 				currentFolder = openSubFolder(currentFolder);
 				break;
 			case SEARCH:
+				cout << "Please enter search query: ";
+				cin >> query;
+				cout << endl;
+
+				currentFolder->search(query);
+				break;
 			case SORT_SIZE:
 			case SORT_NAME:
 				cout << "Coming soon!" << endl;

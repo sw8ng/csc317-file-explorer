@@ -181,7 +181,17 @@ int Folder::getSize() const {
 }
 
 void Folder::search(string query) const {
+    Node<File*>* currFile = this->files.getHead();
+    while (currFile != NULL) {
+        if (currFile->getName() == query) cout << currFile->getName() << " in folder " << this->getName() << endl;
+    }
 
+    if (this->getName() == query) {
+        if (this->getParent() != NULL) cout << this->getName() << " in folder " << this->getParent() << endl;
+        else cout << this->getName() << " is the highest folder" << endl;
+    }
+
+    this->getNext()->search(query);
 }
 
 void Folder::printHierachy() const {
