@@ -181,17 +181,32 @@ int Folder::getSize() const {
 }
 
 void Folder::search(string query) const {
+    if (this->searchHelper(query) == false) cout << "Search query not found" << endl;
+}
+bool Folder::searchHelper(string query) const {
+    bool foundMatch = false;
+
     Node<File*>* currFile = this->files.getHead();
     while (currFile != NULL) {
-        if (currFile->getName() == query) cout << currFile->getName() << " in folder " << this->getName() << endl;
+        if (currFile->getData()->getName() == query) {
+            cout << currFile->getData()->getName() << " in folder " << this->getName() << endl;
+            foundMatch = true;
+        }
     }
 
     if (this->getName() == query) {
-        if (this->getParent() != NULL) cout << this->getName() << " in folder " << this->getParent() << endl;
+        if (this->getParent() != NULL) cout << this->getName() << " in folder " << this->getParent()->getName() << endl;
         else cout << this->getName() << " is the highest folder" << endl;
+        foundMatch = true;
     }
 
-    this->getNext()->search(query);
+    Node<Folder*>* currFolder = this->folders.getHead();
+    while (currFolder != NULL) {
+        if (currFolder->getData()->searchHelper(query) == true) foundMatch = true;
+        currFolder = currFolder->getNext();
+    }
+
+    return foundMatch;
 }
 
 void Folder::printHierachy() const {

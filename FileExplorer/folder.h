@@ -11,6 +11,7 @@ private:
 	LinkedList<File*> files;
 	LinkedList<Folder*> folders;
 	Folder* parent;
+	bool searchHelper(std::string query) const;
 public:
 	//initializes list of files and list of folders inside constructor
 	Folder(std::string name = "folder_name", Folder* parent = nullptr);
