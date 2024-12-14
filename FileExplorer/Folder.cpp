@@ -86,6 +86,7 @@ void Folder::moveFile(const string& fileName, const string& dest) {
         cout << "File with name " << fileName << " not found!" << endl;
     }
 }
+
 void Folder::moveFolder(const string& folderName, const string& dest) {
     Node<Folder*>* currFolderNode = this->folders.getHead();
     Folder* folderToMove = nullptr;
@@ -126,7 +127,6 @@ void Folder::moveFolder(const string& folderName, const string& dest) {
     }
 }
 
-
 File* Folder::getFile(string name) {
 	Node<File*>* fileNode = this->files.getHead();
 
@@ -140,8 +140,6 @@ File* Folder::getFile(string name) {
 	cout << "No file with name " << name << " found in folder " << this->getName() << "." << endl;
 	return nullptr; 
 }
-
-
 
 Folder* Folder::getFolder(string name) {
 	Node<Folder*>* folderNode = this->folders.getHead();
@@ -160,7 +158,6 @@ Folder* Folder::getFolder(string name) {
 Folder* Folder::getParent() const {
     return this->parent;
 }
-
 
 int Folder::getSize() const {
 	int totalSize = 0;
@@ -181,32 +178,29 @@ int Folder::getSize() const {
 }
 
 void Folder::search(string query) const {
-    if (this->searchHelper(query) == false) cout << "Search query not found" << endl;
-}
-bool Folder::searchHelper(string query) const {
-    bool foundMatch = false;
+    cout << "Searching for " << query << "..." << endl;
 
-    Node<File*>* currFile = this->files.getHead();
-    while (currFile != NULL) {
-        if (currFile->getData()->getName() == query) {
-            cout << currFile->getData()->getName() << " in folder " << this->getName() << endl;
-            foundMatch = true;
+    if (false == this->searchHelper(query)) {
+        cout << "Search query not found" << endl;
+    }
+}
+
+bool Folder::searchHelper(string query) const {
+    for (Node<File*>* fileNode = this->files.getHead(); fileNode != nullptr; fileNode = fileNode->getNext()) {
+        if (fileNode->getData()->getName() == query) {
+            cout << "File found " << fileNode->getData()->getName() 
+                << " in folder " << fileNode->getData()->getParent()->getName() << endl;
+            return true;
         }
     }
 
-    if (this->getName() == query) {
-        if (this->getParent() != NULL) cout << this->getName() << " in folder " << this->getParent()->getName() << endl;
-        else cout << this->getName() << " is the highest folder" << endl;
-        foundMatch = true;
+    for (Node<Folder*>* folderNode = this->folders.getHead(); folderNode != nullptr; folderNode = folderNode->getNext()) {
+        if (folderNode->getData()->searchHelper(query)) {
+            return true;
+        }
     }
 
-    Node<Folder*>* currFolder = this->folders.getHead();
-    while (currFolder != NULL) {
-        if (currFolder->getData()->searchHelper(query) == true) foundMatch = true;
-        currFolder = currFolder->getNext();
-    }
-
-    return foundMatch;
+    return false;
 }
 
 void Folder::printHierachy() const {
@@ -226,7 +220,6 @@ void Folder::printHierachy() const {
     }
 
     --indentLevel;
-
 }
 
 void Folder::print() const {
@@ -251,7 +244,6 @@ void Folder::print() const {
 Node<Folder*>* Folder::getFoldersHead() const {
     return this->folders.getHead(); 
 }
-
 
 bool Folder::operator==(const Folder& rhs) const {
     //debug

@@ -4,16 +4,18 @@
 using namespace std;
 
 
-File::File(string name, int size, string type) {
+File::File(string name, int size, string type, FileSystemObject* parent) {
 	this->name = name;
 	this->size = size;
 	this->type = type;
+	this->parent = parent;
 }
 
 File::File(const File& file) {
 	this->name = file.name;
 	this->size = file.size;
 	this->type = file.type;
+	this->parent = file.parent;
 }
 
 int File::getSize() const {
@@ -30,6 +32,14 @@ string File::getType() const {
 
 void File::setType(string type) {
 	this->type = type;
+}
+
+FileSystemObject* File::getParent() const {
+	return this->parent;
+}
+
+void File::setParent(FileSystemObject* parent) {
+	this->parent = parent;
 }
 
 void File::print() const {

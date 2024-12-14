@@ -55,8 +55,6 @@ void fileSystemStart() {
 			case SEARCH:
 				cout << "Please enter search query: ";
 				cin >> query;
-				cout << endl;
-
 				currentFolder->search(query);
 				break;
 			case SORT_SIZE:
@@ -203,7 +201,7 @@ void addFileOrFolder(Folder* currentFolder) {
 
 		}
 
-		File* newFile = new File(fileName, fileSize, fileType);
+		File* newFile = new File(fileName, fileSize, fileType, currentFolder);
 		currentFolder->addFile(newFile);
 
 		cout << "File \"" << fileName << "\" of type \"" << fileType << "\" and size "
@@ -355,7 +353,7 @@ void copyFileOrFolder(Folder* currentFolder) {
 			}
 
 			if (destinationFolder != nullptr) {
-				File* newFile = new File(fileToCopy->getName() + "_copy", fileToCopy->getSize(), fileToCopy->getType());
+				File* newFile = new File(fileToCopy->getName() + "_copy", fileToCopy->getSize(), fileToCopy->getType(), fileToCopy->getParent());
 				destinationFolder->addFile(newFile);
 				cout << "File \"" << name << "\" copied successfully to \"" << destinationFolder->getName() << "\"." << endl;
 			}else {
