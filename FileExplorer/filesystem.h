@@ -1,7 +1,7 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
-#include "folder.h"
+#include "Folder.h"
 
 struct FileSystem : public Searchable{
 private:

@@ -1,6 +1,7 @@
-#include "node.h"
 #include <string>
-#include "folder.h"
+#include "Node.h"
+#include "Folder.h"
+
 using namespace std;
 
 template <typename T>

@@ -1,7 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include "filesystemobject.h"
+#include "FileSystemObject.h"
 
 struct File : public FileSystemObject {
 private:

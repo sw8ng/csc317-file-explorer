@@ -1,8 +1,8 @@
 #include <string>
-#include "linkedList.h"
-#include "node.h"
-#include "folder.h"
-#include "file.h"
+#include "LinkedList.h"
+#include "Node.h"
+#include "Folder.h"
+#include "File.h"
 using namespace std;
 
 template <typename T>

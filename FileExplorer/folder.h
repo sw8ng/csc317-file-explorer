@@ -1,10 +1,10 @@
 #ifndef FOLDER_H
 #define FOLDER_H
 
-#include "filesystemobject.h"
-#include "file.h"
-#include "searchable.h"
-#include "linkedlist.h"
+#include "FileSystemObject.h"
+#include "File.h"
+#include "Searchable.h"
+#include "LinkedList.h"
 
 struct Folder : public FileSystemObject, public Searchable {
 private:

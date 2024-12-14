@@ -2,7 +2,7 @@
 #define LINKEDLIST_H
 
 #include <string>
-#include "node.h"
+#include "Node.h"
 
 template <typename T>
 class LinkedList {
@@ -24,6 +24,5 @@ public:
 
     int getSize() const;
 };
-
 
 #endif

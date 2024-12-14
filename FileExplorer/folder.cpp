@@ -1,4 +1,4 @@
-#include "folder.h"
+#include "Folder.h"
 #include <iostream>
 
 using namespace std;
