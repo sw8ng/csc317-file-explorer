@@ -80,6 +80,9 @@ getMenuChoice: Handles the user interface.
 Future functionality:
 *********************
 
+File: Should store some kind of body content in addition to its name, type, and size.
+
 Folder:
+- searchHelper(string query): Should be recursive.
 - sizeSort(): Will sort all files in the file linked list so that the files with the biggest size appear at the top.
 - nameSort(): Will sort all files in the file linked list to be in alphabetical order.
