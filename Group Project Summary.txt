@@ -5,84 +5,94 @@ Current functionality:
 **********************
 
 Node: A Node is made up of a piece of data of a generic type and two pointers to the next and previous nodes in the list.
-- Node (T data): Creates a new node and puts the provided data inside of it.
-- getData(): Returns the data held by node.
-- getNext()/getPrev(Node<T>* next): Returns the next/previous node in the list.
-- setNext()/setPrev(Node<T>* prev): Changes the next/previous node to the new node.
++ Node (T data): Creates a new node and puts the provided data inside of it.
++ getData(): Returns the data held by node.
++ getNext()/getPrev(): Returns the next/previous node in the list.
++ setNext(Node<T>* prev)/setPrev(Node<T>* prev): Changes the next/previous node to the new node.
 
 LinkedList: A LinkedList is a series of nodes of a specific type that holds a head and tail node, as well as it's own size.
-- LinkedList(): Creates an empty linked list.
-- LinkedList(const LinkedList<T>& list): Copies a linked list.
-- ~LinkedList(): Deletes the current linked list.
-- push_back(T data): Adds a new node to the back of the list.
-- deleteData(T data): Finds and deletes the first node that holds the provided "delete data" in the linked list.
-- getHead()/getTail(): Returns the first/last node in the list.
-- getSize(): Returns the current size of the list.
-- operator==: Returns if the left linked list is the same as the right linked list.
-- operator+=: Appends the right linked list to the left linked list.
++ LinkedList(): Creates an empty linked list.
++ LinkedList(const LinkedList<T>& list): Copies a linked list.
++ ~LinkedList(): Deletes the current linked list.
++ push_back(T data): Adds a new node to the back of the list.
++ deleteData(T data): Finds and deletes the first node that holds the provided "delete data" in the linked list.
++ getHead()/getTail(): Returns the first/last node in the list.
++ getSize(): Returns the current size of the list.
++ operator==: Returns if the left linked list is the same as the right linked list.
++ operator+=: Appends the right linked list to the left linked list.
 
 FileSystem: The FileSystem contains the entire file structure. The FileSystem includes a root folder.
-- FileSystem(): Creates a new file system.
-- FileSystem(Folder* folder): Creates a new file system and puts the provided folder inside of it.
-- setRoot(Folder* folder): Changes the root of the current File System to be the new folder.
-getRoot(): Returns the current root.
++ FileSystem(): Creates a new file system with the default folders.
++ FileSystem(Folder* folder): Creates a new file system and puts the provided folder inside of it.
++ getFolder(Folder* currentFolder, string& name): Searches the folder linked list for a folder with a name equal to "name" and returns the folder if it exists.
++ setRoot(Folder* folder): Changes the root of the current File System to be the new folder.
++ getRoot(): Returns the current root.
++ search(string query): No functionality (virtual method to be overwritten).
 
 FileSystemObject: A FileSystemObject is a superclass to all objects that go in the file system. Each FileSystemObject has a name.
-- ~FileSystemObject(): Deletes the current file system object.
-- print(): No functionality (void method to be overwritten).
-- getName(): Returns the name of the file system object.
-- setName(): Changes the name of the file system object.
++ ~FileSystemObject(): Deletes the current file system object.
++ print(): No functionality (virtual method to be overwritten).
++ getName(): Returns the name of the file system object.
++ setName(): Changes the name of the file system object.
 
 Searchable: A blueprint for objects that can be searched through.
-- ~Searchable(): Deletes the current searchable object.
-- search(string query): No functionality (void method to be overwritten).
++ ~Searchable(): Deletes the current searchable object.
++ search(string query): No functionality (virtual method to be overwritten).
 
 File: A File is a type of File System Object that holds a size and a type.
-- File(string name, int size, string type): Creates a new file with a name equal to the provided name, a size equal to the provided size (default -1), and a type equal to the provided type (default "unknown").
-- File(File& file): Copies a file.
-- getSize(): Returns the current size of the file.
-- setSize(int size): Changes the size of the file to be the provided size.
-- getType(): Returns the type of the file.
-- setType(string type): Changes the type of the file to be the provided type.
-- print(): Outputs the file's name, size, and type.
-- operator==: Returns if the left file is the same as the right file.
++ File(string name, int size, string type): Creates a new file with a name equal to the provided name, a size equal to the provided size (default -1), and a type equal to the provided type (default "unknown").
++ File(File& file): Copies a file.
++ getSize(): Returns the current size of the file.
++ setSize(int size): Changes the size of the file to be the provided size.
++ getType(): Returns the type of the file.
++ setType(string type): Changes the type of the file to be the provided type.
++ print(): Outputs the file's name, size, and type.
++ operator==: Returns if the left file is the same as the right file.
 
-Folder: A Folder is a type of File System Object that holds a linked list of files and a linked list of folders.
-- Folder(string name): Creates a new folder with a name equal to the provided name.
-- Folder(Folder& folder): Copies a folder.
-- addFile(File* file): Adds a new file to the file linked list.
-- deleteFile(File* file): Finds and deletes the first file equal to the provided "delete file" in the file linked list.
-- addFolder(Folder* folder): Adds a new folder to the folder linked list.
-- deleteFolder(Folder* folder): Finds and deletes the first folder equal to the provided "delete folder" in the folder linked list.
-- moveFile(string& fileName, string& dest): Moves a file from the file linked list into a folder inside of the current folder's folder linked list.
-- moveFolder(string& folderName, string& dest): Moves folder from the folder linked list into another folder inside current folder's folder linked list.
-- getFile(string query): Returns all files in the file linked list with a name equal to the variable "query".
-- getFolder(string query): Returns all folders in the folder linked list with a name equal to the variable "query".
-- getSize(): Returns the combined size of the file linked list and folder linked list.
-- search(string query): Will output a search query not found message if searchHelper returns false (if searchHelper did not find the search query anywhere).
+Folder: A Folder is a type of File System Object that holds a linked list of files, a linked list of folders, and a parent folder.
++ Folder(string name): Creates a new folder with a name equal to the provided name.
++ Folder(Folder& folder): Copies a folder.
++ addFile(File* file): Adds a new file to the file linked list.
++ deleteFile(File* file): Finds and deletes the first file equal to the provided "delete file" in the file linked list.
++ addFolder(Folder* folder): Adds a new folder to the folder linked list.
++ deleteFolder(Folder* folder): Finds and deletes the first folder equal to the provided "delete folder" in the folder linked list.
++ moveFile(string& fileName, string& dest): Moves a file from the file linked list into a folder inside of the current folder's folder linked list.
++ moveFolder(string& folderName, string& dest): Moves folder from the folder linked list into another folder inside current folder's folder linked list.
++ getFile(string query): Returns all files in the file linked list with a name equal to the variable "query".
++ getFolder(string query): Returns all folders in the folder linked list with a name equal to the variable "query".
++ getParent(): Returns the parent folder to this (if it exists).
++ getSize(): Returns the combined size of the file linked list and folder linked list.
++ search(string query): Will output a search query not found message if searchHelper returns false (if searchHelper did not find the search query anywhere).
 - searchHelper(string query): Will output all files in the file linked list and folders in the folder linked list with a name equal to the variable "query".
-- print(): Outputs all of the files in the file linked list, then all of the folders in the folder linked list.
-- operator==: Will return if the left folder is the same as the right folder.
++ printHierachy(): Outputs all of the files in the file linked list, then all of the folders in the folder linked list, with increasing indentation levels for every subfolder.
++ print(): Outputs all of the files in the file linked list, then all of the folders in the folder linked list, also printing the size of each object.
++ getFoldersHead(): Returns the head of the folder linked list.
++ operator==: Will return if the left folder is the same as the right folder.
 
-Main: Exists to call getMenuChoice from getmenuchoice and return 0.
+Main: Exists to call getMenuChoice from getmenuchoice and return 0 (and optionally run the test file).
 
 getMenuChoice: Handles the user interface.
-- fileSystemStart(): Calls getStarting Folder, then prompts the user with a list of tasks it can preform and picks a function to run based on what getMenuChoice returns.
-- getMenuChoice(): Returns the command line user input.
-- getStartingFolder(FileSystem* fileSystem): Asks the user for a starting root file and returns it.
-- openSubFolder(FileSystem* fileSystem): Asks the user for a subfolder to move into and returns it.
-- addFileOrFolder(Folder* currentFolder): Creates a new file or folder based on user input.
-- deleteFileOrFolder(Folder* currentFolder): Deletes an existing file or folder based on user input.
-- moveFileOrFolder(Folder* currentFolder): Moves an existing file or folder to a different folder based on user input.
-- copyFileOrFodler(Folder* currentFolder): Creates a copy of an existing file or folder and puts it in a folder based on user input.
++ fileSystemStart(): Calls getStarting Folder, then prompts the user with a list of tasks it can preform and picks a function to run based on what getMenuChoice returns.
++ getMenuChoice(): Returns the command line user input.
++ getStartingFolder(FileSystem* fileSystem): Asks the user for a starting root file and returns it.
++ openSubFolder(FileSystem* fileSystem): Asks the user for a subfolder to move into and returns it.
++ addFileOrFolder(Folder* currentFolder): Creates a new file or folder based on user input.
++ deleteFileOrFolder(Folder* currentFolder): Deletes an existing file or folder based on user input.
++ moveFileOrFolder(Folder* currentFolder): Moves an existing file or folder to a different folder based on user input.
++ copyFileOrFodler(Folder* currentFolder): Creates a copy of an existing file or folder and puts it in a folder based on user input.
+
+Test: Runs a suite of tests that check the majority of the program's functionality.
 
 *********************
 Future functionality:
 *********************
 
+Program should have a save feature that allows the file system to be reopened after being closed
+
 File: Should store some kind of body content in addition to its name, type, and size.
 
 Folder:
-- searchHelper(string query): Should be recursive.
-- sizeSort(): Will sort all files in the file linked list so that the files with the biggest size appear at the top.
-- nameSort(): Will sort all files in the file linked list to be in alphabetical order.
++ sizeSort(): Will sort all files in the file linked list so that the files with the biggest size appear at the top.
++ nameSort(): Will sort all files in the file linked list to be in alphabetical order.
+
+Test: Should run more tests for the program.
